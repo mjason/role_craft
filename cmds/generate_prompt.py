@@ -42,8 +42,8 @@ class GeneratePrompt(GenerateBase):
             [f'(你的{key}：{value})' for key, value in self.attr.items()])
         data = open(args.template, "r").readlines()
         with open(self.output, "w") as fw:
-            for i in range(len(data)):
-                line = json.loads(data[i])
+            for item in data:
+                line = json.loads(item)
                 new_line = self.prompt.format(
                     attr=joined_att, input=line["inputs"], target=line["target"])
                 fw.write(new_line + "\n")
