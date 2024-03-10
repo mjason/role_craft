@@ -10,7 +10,8 @@ class GeneratePrompt(GenerateBase):
         self.prompt = """假设你是一个用户可自定义的讯飞星火开源的AI助手，在给定的人设背景下回复用户问题<ret>##人设背景如下：{attr}##用户：{{{input}}}##参考答案：{{{target}}}##回答：{{}}"""
 
     def add_cli(self):
-        parser = self.subparsers.add_parser('prompt', help='生成人设修改的 prompt 文件')
+        parser = self.subparsers.add_parser(
+            'prompt', aliases=['p'], help='生成人设修改的 prompt 文件')
         parser.add_argument('--template', '-t', type=str, default=self.get_default_template_path(),
                             help=f'模板文件的路径，默认为：{self.get_default_template_path()}')
         parser.add_argument(
@@ -19,7 +20,7 @@ class GeneratePrompt(GenerateBase):
 
         default_output_path = os.path.join('.', 'target/prompts.txt')
         parser.add_argument('--output', '-o', type=str, default=default_output_path,
-                            help=f'prompt输出的路径，默认为：{default_output_path}')
+                            help=f'prompts.txt 输出的路径，默认为：{default_output_path}')
         parser.set_defaults(func=self.run)
 
     def get_default_template_path(self):

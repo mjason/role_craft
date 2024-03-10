@@ -1,14 +1,18 @@
 import argparse
+from dotenv import load_dotenv
 
 import cmds
+
+load_dotenv()
 
 parser = argparse.ArgumentParser(description='星火大模型人设工具')
 subparsers = parser.add_subparsers(help='多个指令')
 
-parser_g = subparsers.add_parser('g', help='生成相关文件或代码')
+parser_g = subparsers.add_parser('generate', aliases=['g'], help='生成相关文件或代码')
 subparsers_g = parser_g.add_subparsers(help='prompt 生成请求星火的 prompt 文件')
 
 cmds.GeneratePrompt(subparsers_g)
+cmds.GenerateQA(subparsers_g)
 
 args = parser.parse_args()
 
